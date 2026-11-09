@@ -8,7 +8,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/devkitpro/devkitarm:latest
+      image: devkitpro/devkitarm:20260610
 
     steps:
       - name: Checkout
