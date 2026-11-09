@@ -1,0 +1,29 @@
+name: build-3ds
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/devkitpro/devkitarm:latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build 3DS homebrew
+        run: |
+          export DEVKITPRO=/opt/devkitpro
+          export DEVKITARM=${DEVKITPRO}/devkitARM
+          make
+
+      - name: Upload 3dsx artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: max-3ds
+          path: |
+            *.3dsx
+            *.elf
